@@ -1,0 +1,11 @@
+% filtro de bibliografía
+\defbibfilter{articleinproceeding}{
+  \type{inproceedings} \or \type{article}
+}
+%--------------------------------------------------------------------------
+
+\section{Bibliografía}
+\label{section:references}
+
+\printbibliography[filter=articleinproceeding,title={Artículos}]
+\printbibliography[type=book,title={Libros}]

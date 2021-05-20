@@ -1,0 +1,165 @@
+%============================================================================================
+% DATOS DE LA TESIS
+% 1.RELLENAR LOS DATOS
+\newcommand{\titulo}{[Título de Trabajo Fin de Estudios]}
+\newcommand{\autor}{[Nombre del Alumno]}
+\newcommand{\director}{[Nombre del Director de Proyecto]}
+\newcommand{\fecha}{\today}
+\newcommand{\ciudad}{[Ciudad del Centro de Estudios]}
+\newcommand{\universidad}{[Centro de Estudios]}
+\newcommand{\escuela}{[Escuela del Centro de Estudios]}
+\newcommand{\master}{[Nombre de Estudios (Máster/Grado)]}
+\newcommand{\especialidad}{[Modalidad de Estudios]}
+\newcommand{\tipoTesis}{[Tipo de Trabajo]}
+\newcommand{\palabrasClave}{[Palabras, Clave, Rellenar]}
+%============================================================================================
+% REQUISITOS TFE
+% 2. MODIFICAR SI FUERA NECESARIO
+\newcommand{\papel}{a4paper} % tamaño papel - a4
+\newcommand{\letra}{12pt} % letra - 12
+\newcommand{\interlineado}{1.5} %interlineado 1.5
+\newcommand{\margenes}{25mm} % margenes 25mm cada uno
+\newcommand{\distribucion}{twoside} %papel a doble cara
+% texto justificado \justify
+% encabezado o pie de página
+% numero de pagina
+%============================================================================================
+\documentclass[\papel, \letra, \distribucion]{article} %tipo documento y tamaño letra
+\usepackage[\papel, headsep=\letra, top=\margenes, bottom=\margenes, left=\margenes, right=\margenes]{geometry}
+\usepackage{ragged2e} %\justify
+% cabecera y pie de páginas----------------------
+% 3. Modificar posición de cabecera y pie de página al gusto
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{}  %left even, right odd
+\fancyhead[RE,LO]{}     %right even, left odd
+\fancyhead[CE,CO]{\titulo} %center even/odd
+\fancyfoot[RE,LO]{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[CE,CO]{}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+\setlength{\headheight}{15pt}% asignamos espacio para la cabecera
+% -----------------------------------------------
+% fondo de páginas
+% 4. Configurar al gusto la marca de agua del documento
+\usepackage{background} %fondo de páginas
+\backgroundsetup{contents={}} %deshabilitar cualquier configuración por defecto
+\newcommand{\setbackground}{
+    \backgroundsetup{
+        scale = 1.7,
+        color = yellow,
+        opacity = 0.03,
+        vshift = -7cm,
+        hshift = -0.5cm,
+        angle = 48,
+        contents = {
+            \includegraphics[
+                width = \paperwidth,  
+                height = \paperheight, 
+                keepaspectratio
+            ]{logo.png}
+        }
+    }
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel} %configuramos idioma de corrección ortográfica español
+\usepackage{csquotes} %tildes y acentos
+\usepackage{pdfpages} %portada/contraportada pdf
+\usepackage{biblatex} %bibliografía
+\addbibresource{mybib.bib} %Import the bibliography file
+\usepackage{setspace} %paquete para interlineado \setstrech
+\usepackage{afterpage} %comando para aplicar algo a partir de sig. pág.
+\usepackage{booktabs} %top/bottom rules
+
+% enlaces en la tabla de contenidos---------------------------------
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,  %set true if you want colored links
+    linktoc=all,      %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+% -----------------------------------------------
+% pagina en blanco de relleno
+\newcommand\blankpage{
+    \null
+    \backgroundsetup{contents={}}
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage
+    }
+%------------------------------------------------
+
+% funciones de relleno se pueden borrar
+\usepackage{lipsum}% for generating filler text
+\newcommand{\f}[1]{
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[width=8cm]{example-image-a}
+        \caption{Example image {#1} }
+    \end{figure}
+}
+\newcommand{\tbl}[1]{
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{ c c c } \toprule
+        \textbf{A} & \textbf{B} & \textbf{C} \\ \bottomrule
+         cell1 & cell2 & cell3 \\ 
+         cell4 & cell5 & cell6 \\  
+         cell7 & cell8 & cell9 \\ \bottomrule
+        \end{tabular}
+        \caption{Example table {#1} }
+    \end{table}
+}
+%--------------------------------------------------------
+
+\begin{document}
+\pagenumbering{gobble} %deshabilitar numeración
+\setstretch{\interlineado} %interlineado
+
+% PORTADA
+\includepdf{sections/cover/TFM_TAII_front.pdf}
+\afterpage{\blankpage} %relleno con página en blanco
+
+% PORTADA INTERIOR
+\include{sections/00-title-page}
+\afterpage{\blankpage} %relleno con página en blanco
+
+% DEDICATORIA
+\include{sections/01-dedication}
+\afterpage{\blankpage}%relleno con página en blanco
+
+% configuración de fondo de páginas
+\setbackground
+
+% ÍNDICE
+\include{sections/02-tables-of-content}
+\let\cleardoublepage\clearpage
+
+\justify
+% ABSTRACT
+\include{sections/03-abstract}
+
+% INTRODUCCIÓN
+\include{sections/04-introduction}
+
+% MATERIALES Y MÉTODOS
+\include{sections/05-materials-and-methods}
+
+% RESULTADOS Y DISCUSIÓN
+\include{sections/06-results}
+
+% CONCLUSIONES
+\include{sections/07-conclusions}
+
+% BIBLIOGRAFÍA
+\include{sections/08-references}
+\let\cleardoublepage\clearpage
+
+% CONTRAPORTADA
+\backgroundsetup{contents={}}
+\includepdf{sections/cover/TFM_TAII_back.pdf}
+\end{document}
