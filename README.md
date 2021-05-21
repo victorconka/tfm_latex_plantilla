@@ -1,4 +1,6 @@
-# tfm_latex_plantilla
+# tfm_latex_plantilla  
+Vista previa de la plantilla: "tfm_template.pdf".  
+Usar editor a gusto, se recomienda overleaf debido a la sencillez de uso.
 plantilla realizada en latex para TFM según requisitos de UAL  
 Modificada la portada/contraportada de los Powerpoint para que se ajuste a tamaño a4  
 La plantilla es de tipo artículo a doble cara, por lo que para crear apartados se usan :\section, \subsection, \subsubsection...   
